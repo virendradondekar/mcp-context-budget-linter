@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MCP Context Budget Linter</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>MCP Context Budget Linter</h1>
+    <p class="muted">Paste an MCP <code>tools/list</code> response to see roughly what each tool definition costs in context tokens. Estimates use characters ÷ 4, so read them as relative, not exact.</p>
+    <p class="badge" id="mode">Agent-generated prototype · runs locally · rules-based analysis</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <label for="input">Tools JSON</label>
+      <textarea id="input" rows="12" spellcheck="false" placeholder='{"tools":[{"name":"...","description":"...","inputSchema":{}}]}'></textarea>
+      <div class="row">
+        <label for="budget">Token budget</label>
+        <input id="budget" type="number" min="100" step="100" value="8000">
+        <button id="analyze" type="button">Analyze</button>
+        <button id="sample" type="button" class="secondary">Load sample</button>
+        <label class="file secondary">Upload JSON<input id="file" type="file" accept=".json,application/json" hidden></label>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section id="results" class="panel" hidden>
+      <div id="summary" class="summary"></div>
+      <table>
+        <thead><tr><th>Tool</th><th>Tokens</th><th>Cost</th><th>Issues</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Recent analyses</h2>
+      <ul id="history" class="muted"><li>None yet.</li></ul>
+    </section>
+  </main>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

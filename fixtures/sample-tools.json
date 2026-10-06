@@ -1,0 +1,61 @@
+{
+  "tools": [
+    {
+      "name": "search_documents",
+      "description": "Search the knowledge base for documents matching a text query. Use when the user asks about internal policies or product docs. Returns up to 10 results with title, snippet and URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Full-text search query" },
+          "limit": { "type": "integer", "description": "Maximum results (1-10)" }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "find_documents",
+      "description": "Search the knowledge base for documents matching a text query. Returns up to 10 results with title, snippet and URL.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Full-text search query" }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "createTicket",
+      "description": "Creates a support ticket in the demo tracker and returns its id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "description": "Short ticket title" },
+          "body": { "type": "string" },
+          "priority": { "type": "string", "enum": ["low", "normal", "high"] }
+        },
+        "required": ["title"]
+      }
+    },
+    {
+      "name": "do_stuff",
+      "description": "Does stuff",
+      "inputSchema": { "type": "object", "properties": { "x": { "type": "string" }, "y": { "type": "string" } } }
+    },
+    {
+      "name": "run_report",
+      "inputSchema": { "type": "object", "properties": { "report_id": { "type": "string", "description": "Report identifier" } } }
+    },
+    {
+      "name": "export_data",
+      "description": "This tool exports data from the system into a file format of your choosing. It supports a large number of formats including CSV, JSON, XML, YAML, Parquet, Avro, ORC and many more, and can be configured to filter, sort, group, aggregate and transform the data before export. It is extremely flexible and can be used in many scenarios, for example when building weekly reports, when migrating data between systems, when preparing datasets for analytics, when archiving old records, when sharing results with external partners, or when debugging problems with the data itself. Please note that very large exports may take a long time to complete and the tool will return a job identifier that can be polled for status using other tools that are available in this server.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "format": { "type": "string", "description": "Output format such as csv, json, xml, yaml, parquet, avro or orc. Choose whichever is most suitable for the downstream consumer of the exported data and make sure that the consumer actually supports it before selecting." },
+          "filters": { "type": "object", "description": "Filter definitions", "properties": { "field": { "type": "string", "description": "Field name" }, "op": { "type": "string", "description": "Operator", "enum": ["eq", "ne", "gt", "lt", "gte", "lte", "in", "nin", "like", "ilike", "regex", "between", "exists", "missing", "starts", "ends", "contains", "any", "all", "none", "near", "within"] }, "value": { "type": "object", "description": "Value", "properties": { "raw": { "type": "string", "description": "Raw value", "properties": { "inner": { "type": "string", "description": "Inner" } } } } } } }
+        },
+        "required": ["format"]
+      }
+    }
+  ]
+}

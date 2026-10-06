@@ -1,0 +1,16 @@
+{
+  "name": "mcp-context-budget-linter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Estimate and lint the context-token cost of MCP tool definitions (agent-generated prototype)",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "lint": "node scripts/lint.js",
+    "test": "node scripts/smoke.js"
+  }
+}

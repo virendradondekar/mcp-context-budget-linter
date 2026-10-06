@@ -1,0 +1,77 @@
+{
+  "start": [
+    "node",
+    "server.js"
+  ],
+  "routes": [
+    {
+      "path": "/health",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/sample",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/history",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/analyze",
+      "method": "POST",
+      "status": 200,
+      "body": {
+        "budget": 2000,
+        "tools": [
+          {
+            "name": "get_weather",
+            "description": "Get the current weather for a city.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "city": {
+                  "type": "string",
+                  "description": "City name"
+                }
+              },
+              "required": [
+                "city"
+              ]
+            }
+          },
+          {
+            "name": "do_stuff",
+            "description": "Does stuff",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "path": "/api/suggest",
+      "method": "POST",
+      "status": 200,
+      "body": {
+        "tool": {
+          "name": "do_stuff",
+          "description": "Does stuff"
+        }
+      }
+    }
+  ]
+}
